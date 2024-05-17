@@ -1,5 +1,129 @@
 # 백승호 202130213 
 
+## 5월 17일 강의
+- 컨테이너와 배치, 배치관리자 개념
+    1. 컨테이너마다 하나의 배치관리자 존재
+    2. 컨테이너에 부착되는 컴포넌트의 위치와 크기 결정
+    3. 컨테이너의 크기가 변경되면, 컴포넌트의 위치와 크기 재결정
+
+- 배치 관리자 대표 유형 4가지
+    1. FlowLayout 배치관리자
+        - 컴포넌트가 삽입되는 순서대로 왼쪽에서 오른쪽으로 배치
+        - 배치할 공간이 없으면 아래로 내려와서 반복한다.
+    2. BorderLayout 배치관리자
+        - 컨테이너의 공간을 동(EAST), 서(WEST), 남(SOUTH), 북(NORTH), 중앙(CENTER)의 5개 영역으로 나눔
+        - 5개 영역 중 응용프로그램에서 지정한 영역에 컴포넌트 배치
+    3. GridLayout 배치관리자
+        - 컨테이너를 프로그램에서 설정한 동일한 크기의 2차원 격자로 나눔
+        - 컴포넌트는 삽입 순서대로 좌에서 우로, 다시 위에서 아래로 배치
+    4. CardLayout
+        - 컨테이너의 공간에 카드를 쌓아 놓은 듯이 컴포넌트를 포개어 배치
+
+- 컨테이너에 새로운 배치관리자 설정
+    1. setLayout(LayoutManager Im) 메소드 호출
+        - Im을 새로운 배치관리자로 설정
+    2. 사례
+        - JPanel 컨테이너에 BorderLayout 배치관리자를 설정하는 예
+            JPanel p = new Jpanel();
+            p.setLayout(new BorderLayout()); // JPanel에 BorderLayout 설정
+        
+        - 컨텐트팬의 배치관리자를 FlowLayout 배치관리자로 설정
+            Container c - frame.getConentPane(); // 프레임의 컨텐트팬 알아내기
+
+            c.setLayout(new FlowLayout()); // 컨텐트팬에 FlowLayout 설정
+
+        - 오류
+            c.setLayout(FlowLayout); // 오류
+    
+- FlowLayout 배치관리자
+    1. 배치방법
+        - 컴포넌트를 컨테이너 내에 왼쪽에서 오른쪽으로 배치
+            다시 위에서 아래로 순서대로 배치
+                container.setLayout(new FlowLayout());
+                container.add(new JButton("add"));
+                container.add(new JButton("sub"));
+                container.add(new JButton("mul"));
+                container.add(new JButton("div"));
+                container.add(new JButton("Calculate"));
+
+- FlowLayout의 생성자
+    1. 생성자
+        - FlowLayout()
+        - FlowLayout(int align, int hGap, int vGap)
+            1. align : 컴포넌트를 정렬하는 방법 지정. 왼쪽 정렬(FlowLayout.LEFT), 오른쪽 정렬(FlowLayout.RIGHT), 중앙 정렬(FlowLayout.CENTER(디폴트))
+            2. hGap : 좌우 두 컴포넌트사이의수평간격, 픽셀단위. 디폴트는 5
+            3. vGap : 상하 두 컴포넌트사이의수직간격, 픽셀단위. 디폴트는 5
+
+연습) FlowLayoutEx.java
+
+- BorderLayout 배치관리자
+    1. 배치방법
+        - 컨테이너 공간을 5 구역으로 분할, 배치 (동, 서, 남, 북, 중앙)
+        - 배치 방법 add(Component comp, int index)
+    
+- BorderLayout 생성자와 add() 메소드
+    1. 생성자
+        - BorderLayout()
+        - BorderLayout(int hGap, int vGap)
+            hGap : 좌우 두 컴포넌트 사이의 수평 간격, 픽셀 단위(디폴트 : 0)
+            vGap : 상하 두 컴포넌트 사이의 수직 간격, 픽셀 단위(디폴트 : 0)
+    
+    2. add() 메소드
+        - void add(Component comp, int index)
+            comp 컴포넌트를 index 위치에 삽입한다.
+            index : 컴포넌트의 위치
+                동 : BorderLayout.EAST
+                서 : BorderLayout.WEST
+                남 : BorderLayout.SOUTH
+                북 : BorderLayout.NORTH
+                중앙 : BorderLayout.CENTER
+    
+연습) BorderLayOutEx.java
+
+- GridLayout 배치관리자
+    1. 배치방법
+        - 컨테이너 공간을 동일한 사각형 격자(그리드)로 분할하고 각 셀에 컴포넌트 하나씩 배치
+            생성자에 행수와 열수 지정
+            셀에 왼쪽에서 오른쪽으로, 다시 위에서 아래로 순서대로 배치
+
+- GridLayout 생성자
+    1. 생성자
+        - GridLayout()
+        - GridLayout(int rows, int cols)
+        - GridLayout(int rows, int cols, int hGap, int vGap)
+            rows : 격자의 행수 (디폴트 : 1)
+            cols : 격자의 열수 (디폴트 : 1)
+            hGap : 좌우 두 컴포넌트 사이의 수평 간격, 픽셀 단위(디폴트 : 0)
+            vGap : 상하 두 컴포넌트 사이의 수직 간격, 픽셀 단위(디폴트 : 0)
+            rows x cols 만큼의 셀을 가진 격자로 컨테이너 공간을 분할, 배치
+
+연습) GridLayoutEX.java
+
+
+- 배치관리자가 없는 컨테이너가 필요한 경우
+    응용프로그램에서 직접 컴포넌트의 크기와 위치를 결정하고자 하는 경우
+    1. 컴토넌트의 크기나 위치를 개발자 임의로 결정하고자 하는 경우
+    2. 게임 프로그램과 같이 시간이나 마우스/키보드의 입력에 따라 컴포넌트들의 위치와 크기가 수시로 변하는 경우
+    3. 여러 컴포넌트들이 서로 겹쳐 출력하고자 하는 경우
+
+- 컨테이너 배치 관리자 제거 방법
+    1. container.setLayout(null);
+    2. 컨테이너의 배치관리자가 없어지면, 컴포넌트에 대한 어떤 배치도 없음
+
+
+- 컴포넌트의 절대 위치와 크기 설정
+    1. 배치관리자 없는 컨테이너에 컴포넌트를 삽입할 때
+        프로그램에서 컴포넌트의 절대 크기와 위치 설정
+        컴포넌트들이 서로 겹치게 할 수 있음
+    
+    2. 컴포넌트의 크기와 위치 설정 메소드
+        - void setSize(int width, int height) // 컴포넌트 크기 설정
+        - void setLoaction(int x, int y) // 컴포넌트 위치 설정
+        - void setBounds(int x, int y, int width, int height) // 위치와 크기 동시 설정
+
+연습) NullContainerEx.java
+
+
 ## 5월 3일 강의
 
 - 컬렉션(collection)의 개념
@@ -931,6 +1055,3 @@ source control 에서 내용을 넣고 comit을 누르고 업로드를 하면 �
 java 개발 환경 구축
 openJDK 설치, Eclips 설치, Eclips에 openJDK 연결
 자바 프로젝트 생성
-
-
-
