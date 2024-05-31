@@ -1,5 +1,222 @@
 # 백승호 202130213 
 
+## 5월 31일 강의
+자바의 GUI 프로그래밍 방법 2종류
+- 컴포넌트 기반 GUI 프로그래밍
+    1. 스윙 컴포넌트를 이용하여 쉽게 GUI를 구축
+    2. 자바에서 제공하는 컴포넌트의 한계를 벗어나지 못함
+- 그래픽 기반 GUI 프로그래밍
+    1. 그래픽을 이용하여 GUI 구축
+    2. 개발자가 직접 그래픽으로 화면을 구성하는 부담
+    3. 독특한 GUI를 구성할 수 있는 장점
+    4. GUI 처리의 실행 속도가 빨라, 게임 등에 주로 이용
+
+스윙 컴포넌트의 공통 메소드, JComponent의 메소드
+- JComponent
+    1. 스윙 컴포넌트는 모두 상속받는 슈퍼 클래스, 추상 클래스
+    2. 스윙 컴포넌트들이 상속받는 공통 메소드와 상수 구현
+    3. JComponent의 주요 메소드 사례
+연습) JComponentEx.java
+
+JLabel로 문자열과 이미지 출력
+- JLabel의 용도
+    1. 문자열이나 이미지를 화면에 출력하기 위한 목적
+- 레이블 생성
+    1. JLabel() 빈레이블
+    2. JLabel(Icon image) 이미지 레이블
+    3. JLabel(String text) 문자열 레이블
+    4. JLabel(String text, Icon image, int hAlign) 문자열과 이미지 모두 가진 레이블
+    5. hAlign: 수평 정렬 값으로 SwingConstants.LEFT, SwingConstants.RIGHT, SwingConstants.CENTER 중하나
+
+레이블 생성 예
+- 문자열 레이블 생성
+    JLabel textLabel = new JLabel("사랑합니다");
+
+- 이미지 레이블 생성
+    1. 이미지 파일로부터 이미지를 읽기 위해 ImageIcon 클래스 사용
+    2. 다룰 수 있는 이미지 : png, gif, jpg
+
+- 수평 정렬 값을 가진 레이블 컴포넌트 생성
+    수평 정렬로, 문자열과 이미지를 모두 가진 레이블
+연습) LabelEx.java
+
+JButton으로 버튼 만들기
+- JButton의 용도
+    1. 버튼 모양의 컴포넌트. 사용자로부터 명령을 입력 받기 위한 목적
+    2. 버튼은 클릭될 대 Action 이벤트 발생
+
+- 버튼 생성
+    1. JButton() 빈 버튼
+    2. JButton(Icon image) 이미지 버튼
+    3. JButton(String text) 문자열 버튼
+    4. JButton(String text, Icon image) 문자열과 이미지 모두 가진 버튼
+
+이미지 버튼 만들기
+- 하나의 버튼에 3 개의 이미지 등록
+    1. 마우스 조작에 따라 3 개의 이미지 중 적절한 이미지 자동 출력
+
+3개의 버튼 이미지
+- normallcon
+    1. 버튼의 보통 상태(디폴트) 때 출력되는 이미지
+    2. 생성자에 이미지 아이콘 전달 혹은 JButton의 setIcon(normalIcon);
+- rollovericon
+    1. 버튼에 마우스가 올라갈 때 출력되는 이미지
+    2. 이미지 설정 메소드 : JButton의 setRolloverIcon(rolloverIcon);
+- pressdicon
+    1. 버튼을 누른 상태 때 출력되는 이미지
+    2. 이미지 설정 메소드 : JButton의 setPressedIcon(pressedIcon)
+
+JCheckBox로 체크박스 만들기
+- JCheckBox의 용도
+    선택(selected)과 비선택(deselected) 두 상태만 가지는 버튼
+
+- 체크박스 생성
+    1. JCheckBox() 빈 체크박스
+    2. JCheckBox(Icon image) 이미지 체크박스
+    3. JCheckBox(Icon image, boolean selected) 이미지 체크박스
+    4. JcheckBox(String text, Icon image) 문자열과 이미지를 가진 체크박스
+    5. JcheckBox(String text, Icon image, boolean selected) 문자열과 이미지 체크박스
+
+연습) CheckBoxEx.java
+
+체크박스에 Item 이벤트 처리
+- Item 이벤트
+    1. 체크 박스의 선택 상태에 변화가 생길 때 발생하는 이벤트
+        - 사용자가 마우스나 키보드로 체크박스를 선택/해체할 때
+        - 프로그램에서 체크박스를 선택/해체하여 체크 상태에 변화가 생길 때
+    2. 이벤트가 발생하면 itemEvent 객체 생성
+    3. itemListener 리스너를 이용하여 이벤트 처리
+
+연습) CheckBoxItemEventEx.java
+
+JRadioButton으로 라디오 버튼 만들기
+- JRadioButton의 용도
+    1. 버튼 그룹을 형성하고, 그룹에 속한 버튼 중 하나만 선택되는 라디어버튼
+    2. 체크박스와 차이점
+        체크 박스는 각각 선택/해제가 가능하지만, 라디오버튼은 그룹에 속한 버튼 중 하나만 선택
+    
+- 라디오버튼 생성
+    1. JRadioButton() 빈 라디오버튼
+    2. JRadioButton(Icon image) 이미지 라디오버튼
+    3. JRadioButton(Icon image, boolean selected) 이미지 라디오버튼
+    4. JRadioButton(String text, boolean selected) 문자열 라디오버튼
+    5. JRadioButton(String text, Icon image) 문자열과 이미지를 가진 라디오버튼
+    6. JRadioButton(String text, Icon image, boolean selected) 문자열과 이미지를 가진 라디오버튼
+
+라디오버튼 생성 및 item 이벤트 처리
+- 버튼 그룹과 라디오버튼 생성 과정
+    1. 버튼 그룹 객체 생성
+    2. 라디오버튼 생성
+    3. 라디오버튼 그룹에 삽입
+    4. 라디오버튼을 컨테이너에 삽입
+
+- 라디오버튼에 item 이벤트 처리 : itemListener 리스너 이용
+    라디오버튼이 선택/해제되어 상태가 달라지면, item 이벤트 발생
+        1. 사용자가 마우스나 키보드로선택 상태를 변경할 때
+        2. 프로그램에서 JRadioButton의 setSelected()를 호출하여 선택 상태를 변경할 때
+
+연습) RadioButtonEx.java
+
+JTextField로 한 줄 입력 창 만들기
+- JTextField
+    한 줄의 문자열을 입력 받는 창(텍스트 필드)
+    1. 텍스트 입력 동중 <ENTER>키가 입력되면 Action 이벤트 발생
+    2. 입력 가능한 문자 개수와 입력 창의 크기는 서로 다름
+
+- 텍스트필드 생성
+    1. JTextField() 빈 텍스트 필드
+    2. JTextField(int cols) 입력 창의 열의 개수가 cols개인 텍스트필드
+    3. JTextField(String text) text 문자열로 초기화된 텍스트필드
+    4. JTextField(String text, int cols) 입력 창의 열의 개수는 cols개이고 text 문자열로 초기화된 텍스트필드
+
+연습) TextFieldEx.java
+
+TextArea로 여러 줄의 입력 창 만들기
+
+JTextArea
+- 여러 줄의 문자열을 입력받을 수 있는 창(텍스트영역)
+    1. 스크롤바를 지원하지 않는다.
+    2. JScrollPane 객체에 삽입하여 스크롤바 지원받음
+
+생성자
+1. JTextArea() 빈 텍스트영역
+2. JTextArea(int rows, int cols) 입력 창이 rows X cols개의 문자 크기인 텍스트영역
+3. JTextArea(String text) text 문자열로 초기화된 텍스트영역
+4. JTextAtea(String text, int rows, int cols) 입력 창이 rows X cols개의 문자 크기이며 text 문자열로 초기화된 텍스트영역
+
+연습) TextAreaEx.java
+
+- JList <E>
+    1. 하나 이상의 아이템을 보여주고 아이템을 선택하도록 하는 리스트
+    2. Java 7부터 제네릭 리스트로 바뀜
+        <E>에 지정된 타입의 객체만 저장하는 리스트
+    3. JScrollPane에 JList<E>를 삽입하여 스크롤 가능
+
+- 리스트 생성
+    1. JList<E> 빈 리스트
+    2. JList<E> (Vector ListData) 벡터로부터 아이템을 공급받는 리스트
+    3. JList<E> (Object [] ListData) 배열로부터 아이템을 공급받는 리스트
+
+연습) ListEx.java
+
+- JComboBox<E>
+1. 텍스트필드와 버튼, 그리고 드롭다운 리스트로 구성되는 콤보박스
+2. 드롭다운 리스트에서 선택한 것이 텍스트필드에 나타남
+
+- 콤보박스 생성
+    1. JComboBox<E>() 빈 콤보박스
+    2. JComboBox<E>(Vector ListData) 벡터로부터 아이템을 공급받는 콤보박스
+    3. JComboBox<E>(Object [] ListDat) 배열로부터 아이템을 공급받는 콤보박스
+
+연습 ) ComboActionEx.java
+
+
+메뉴 구성
+- 메뉴 만들기에 필요한 스윙 컴포넌트
+    1. 메뉴아이템 - JMenuItem
+    2. 메뉴 -JMenu
+        여러 개의 메뉴 아이템을 가짐
+    3. 메뉴바 - JMenuBar
+        여러 개의 메뉴를 붙이는 바이며, 프레임에 부착됨
+    4. 분리선
+        메뉴아이템 사이의 분리선으로 separator라고 부름
+        JMenu의 addSeparator()를 호출하여 삽입함
+
+연습 ) MenuEx.java
+
+메뉴아이템에 Action 이벤트 달기
+- 메뉴아이템을 클릭하면 Action 발생
+    1. 메뉴아이템은 사용자로부터의 지시나 명령을 받는데 사용
+    2. ActionListener 인터페이스로 리스너 작성
+    3. 각 메뉴아이템마다 이벤트 리스너 설정
+
+연습 ) MenuActionEventEx.java
+
+팝업 다이얼로그, JOptionPane
+- 팝업 다디얼로그
+    1. 사용자에게 메시지를 전달하거나 문자열을 간단히 입력받는 용도
+    2. JOptionPane 클래스를 이용하여 생성
+        Static 타입의 간단한 메소드 이용
+- 입력 다이얼로그 -JOprionPane.showInputDialog()
+    한 줄을 입력 받는 다이얼로그
+
+확인 다이얼로그 -JOptionPane.showConfirmDialog()
+    사용자로부터 Yes/No 응답을 입력 받는 다이얼로그
+
+메시지 다이얼로그 -showMessageDialog
+    단순 메시지를 출력하는 다이얼로그
+
+연습 ) OptionPaneEx.java
+
+
+
+
+
+
+
+
+
+
 ## 5월 24일 강의
 이벤트 기반 프로그래밍
 - 이벤트의 발생에 의해 프로그램 흐름이 결정되는 방식
